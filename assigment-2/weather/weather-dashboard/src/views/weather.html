@@ -1,0 +1,15 @@
+<div class="weather-container">
+    <h1>Weather Dashboard</h1>
+    <div ng-if="errorMessage" class="error-message">
+        {{ errorMessage }}
+    </div>
+    <div ng-if="weatherData">
+        <h2>Weather in {{ weatherData.name }}</h2>
+        <p>Temperature: {{ weatherData.main.temp }} °C</p>
+        <p>Humidity: {{ weatherData.main.humidity }} %</p>
+        <p>Conditions: {{ weatherData.weather[0].description }}</p>
+    </div>
+    <div ng-if="!weatherData && !errorMessage">
+        <p>Please search for a city to see the weather details.</p>
+    </div>
+</div>

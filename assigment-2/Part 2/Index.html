@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="financeApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 50%; margin: auto; }
+        nav a { margin: 0 10px; text-decoration: none; }
+    </style>
+    <script>
+        var app = angular.module("financeApp", ['ngRoute']);
+
+        app.config(function($routeProvider) {
+            $routeProvider
+                .when("/dashboard", {
+                    template: `<h2>Dashboard</h2><p>Income: {{ summary.income }}</p><p>Expenses: {{ summary.expenses }}</p>` ,
+                    controller: "DashboardController"
+                })
+                .when("/expenses", {
+                    template: `<h2>Expenses</h2><input type='number' ng-model='amount' placeholder='Amount'><input type='text' ng-model='description' placeholder='Description'><button ng-click='addExpense(amount, description)'>Add</button><ul><li ng-repeat='exp in expenses'>{{ exp.description }}: ${{ exp.amount }}</li></ul>`,
+                    controller: "ExpensesController"
+                })
+                .when("/income", {
+                    template: `<h2>Income</h2><input type='number' ng-model='amount' placeholder='Amount'><input type='text' ng-model='source' placeholder='Source'><button ng-click='addIncome(amount, source)'>Add</button><ul><li ng-repeat='inc in income'>{{ inc.source }}: ${{ inc.amount }}</li></ul>`,
+                    controller: "IncomeController"
+                })
+                .otherwise({
+                    redirectTo: "/dashboard"
+                });
+        });
+
+        app.controller("DashboardController", function($scope) {
+            $scope.summary = { income: 0, expenses: 0 };
+        });
+
+        app.controller("ExpensesController", function($scope) {
+            $scope.expenses = [];
+            $scope.addExpense = function(amount, description) {
+                $scope.expenses.push({ amount: amount, description: description });
+            };
+        });
+
+        app.controller("IncomeController", function($scope) {
+            $scope.income = [];
+            $scope.addIncome = function(amount, source) {
+                $scope.income.push({ amount: amount, source: source });
+            };
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Personal Finance Tracker</h1>
+        <nav>
+            <a href="#/dashboard">Dashboard</a>
+            <a href="#/expenses">Expenses</a>
+            <a href="#/income">Income</a>
+        </nav>
+        <div ng-view></div>
+    </div>
+</body>
+</html>

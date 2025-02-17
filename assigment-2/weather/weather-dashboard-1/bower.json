@@ -1,0 +1,17 @@
+{
+  "name": "weather-dashboard",
+  "description": "A simple weather dashboard application using AngularJS.",
+  "main": "index.html",
+  "authors": [
+    "Your Name"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.8.2",
+    "angular-route": "^1.8.2",
+    "jquery": "^3.6.0"
+  },
+  "devDependencies": {},
+  "homepage": "https://github.com/yourusername/weather-dashboard",
+  "private": true
+}

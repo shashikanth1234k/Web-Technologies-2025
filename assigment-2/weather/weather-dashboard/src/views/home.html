@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather Dashboard</h1>
+        <div>
+            <input type="text" ng-model="city" placeholder="Enter city name" />
+            <button ng-click="searchWeather(city)">Get Weather</button>
+        </div>
+        <div ng-if="errorMessage" class="error">
+            {{ errorMessage }}
+        </div>
+        <div ng-if="weatherData">
+            <h2>Weather in {{ weatherData.name }}</h2>
+            <p>Temperature: {{ weatherData.main.temp }} °C</p>
+            <p>Humidity: {{ weatherData.main.humidity }} %</p>
+            <p>Conditions: {{ weatherData.weather[0].description }}</p>
+        </div>
+    </div>
+</body>
+</html>
